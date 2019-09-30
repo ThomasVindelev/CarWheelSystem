@@ -28,7 +28,9 @@ public class ConveyorBelt implements Runnable {
                         notNull = false;
                     }
                 }
-                productionStock.addToStock(wheel);
+                synchronized (productionStock) {
+                    productionStock.addToStock(wheel);
+                }
                 wheelsProduced++;
                 notNull = false;
                 reset();
