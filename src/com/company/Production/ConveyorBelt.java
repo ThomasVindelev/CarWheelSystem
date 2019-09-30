@@ -6,7 +6,7 @@ public class ConveyorBelt implements Runnable {
 
     private static final ProductionQueue productionQueue = new ProductionQueue();
     private static ProductionStock productionStock = new ProductionStock();
-    private boolean notNull = false;
+    private boolean unlock = false;
     private int wheelsProduced = 0;
 
     @Override
@@ -16,23 +16,23 @@ public class ConveyorBelt implements Runnable {
             synchronized (productionQueue) {
                 if (productionQueue.hasItem()) {
                     wheel = productionQueue.getNextItem();
-                    notNull = true;
+                    unlock = true;
                 }
             }
-            if (notNull) {
+            if (unlock) {
                 for (int i = 1; i <= wheel.getProductionTime(); i++) {
-                    System.out.println(((float) i / wheel.getProductionTime())*100 + "%");
+                    System.out.println(((float) i / wheel.getProductionTime())*100 + "%" + Thread.currentThread());
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
-                        notNull = false;
+                        unlock = false;
                     }
                 }
                 synchronized (productionStock) {
                     productionStock.addToStock(wheel);
                 }
                 wheelsProduced++;
-                notNull = false;
+                unlock = false;
                 reset();
             } else {
                 try {

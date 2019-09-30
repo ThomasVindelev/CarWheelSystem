@@ -10,15 +10,15 @@ import java.util.List;
 public class ProductionStock {
 
     private static List<Wheel> wheelStock = new ArrayList<>();
+    private int normal = 0;
+    private int winter = 0;
+    private int quality = 0;
 
     public void addToStock(Wheel wheel) {
         wheelStock.add(wheel);
     }
 
     public void viewStock() {
-        int normal = 0;
-        int winter = 0;
-        int quality = 0;
         for (Wheel wheel : wheelStock) {
             if (wheel instanceof NormalWheel) {
                 normal++;
@@ -30,5 +30,4 @@ public class ProductionStock {
         }
         System.out.println("Normal: " + normal + " Winter: " + winter + " Quality: " + quality);
     }
-
 }
