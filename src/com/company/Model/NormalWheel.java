@@ -10,4 +10,8 @@ public class NormalWheel implements Wheel {
         return productionTime;
     }
 
+    public String getName() {
+        return name;
+    }
+
 }

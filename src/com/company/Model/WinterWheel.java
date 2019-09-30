@@ -10,4 +10,8 @@ public class WinterWheel implements Wheel {
         return productionTime;
     }
 
+    public String getName() {
+        return name;
+    }
+
 }

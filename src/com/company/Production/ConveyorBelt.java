@@ -6,28 +6,35 @@ public class ConveyorBelt implements Runnable {
 
     private static final ProductionQueue productionQueue = new ProductionQueue();
     private static ProductionStock productionStock = new ProductionStock();
-    private boolean isReady = true;
+    private boolean notNull = false;
+    private int wheelsProduced = 0;
 
     @Override
-    public void run() throws NullPointerException {
+    public void run() {
+        Wheel wheel = null;
         while (true) {
-            if (productionQueue.hasItem()) {
-                Wheel wheel = productionQueue.getNextItem();
-                System.out.println("1123456789");
-                System.out.println(wheel.getProductionTime());
+            synchronized (productionQueue) {
+                if (productionQueue.hasItem()) {
+                    wheel = productionQueue.getNextItem();
+                    notNull = true;
+                }
+            }
+            if (notNull) {
                 for (int i = 1; i <= wheel.getProductionTime(); i++) {
-                    System.out.println((Math.round((float) i / wheel.getProductionTime())*100) + "%");
+                    System.out.println(((float) i / wheel.getProductionTime())*100 + "%");
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
-                        System.out.println("dinjmor");
+                        notNull = false;
                     }
                 }
                 productionStock.addToStock(wheel);
+                wheelsProduced++;
+                notNull = false;
+                reset();
             } else {
                 try {
                     Thread.sleep(1000);
-                    isReady = true;
                 } catch (InterruptedException e) {
                     System.out.println("An error occured at conveyorbelt");
                 }
@@ -35,7 +42,21 @@ public class ConveyorBelt implements Runnable {
         }
     }
 
-    public boolean isReady() {
-        return isReady;
+    public void reset() {
+        if (wheelsProduced != 10) {
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                System.out.println("Cleaning up conveyorbelt");
+                Thread.sleep(6000);
+                wheelsProduced = 0;
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
