@@ -9,4 +9,8 @@ public class ProductionStock {
 
     private static List<Wheel> wheelStock = new ArrayList<>();
 
+    public void addToStock(Wheel wheel) {
+        wheelStock.add(wheel);
+    }
+
 }

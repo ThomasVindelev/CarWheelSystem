@@ -1,8 +1,8 @@
 package com.company.Model;
 
-public class WinterWheel implements Wheel{
+public class WinterWheel implements Wheel {
 
-    private int productionTime = 10;
+    private int productionTime = 14;
     private String name = "Winter Wheel";
 
     @Override
