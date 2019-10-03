@@ -1,7 +1,6 @@
 package com.company.Production;
 import com.company.Model.NormalWheel;
 import com.company.Model.QualityWheel;
-import com.company.Model.Wheel;
 import com.company.Model.WinterWheel;
 
 import java.util.Scanner;
@@ -28,7 +27,7 @@ public class Factory {
     }
 
     public void orderItems(Scanner scanner) {
-        System.out.println("1. Normal Wheel   2. Winter Wheel   3. High Quality Wheel");
+        System.out.println("1. Normal Wheel   2. Winter Wheel   3. High Quality Wheel\nType 'exit' to return");
         String choice = scanner.nextLine();
         if (!choice.equals("exit")) {
             System.out.println("How many wheels do you want?");
@@ -49,6 +48,7 @@ public class Factory {
                         break;
                 }
             }
+            scanner.nextLine();
         }
     }
 

@@ -1,4 +1,4 @@
-package com.company;
+package com.company.Boot;
 
 import com.company.Production.Factory;
 
@@ -19,7 +19,6 @@ public class GUI {
             switch (choice) {
                 case "1":
                     factory.orderItems(scanner);
-                    scanner.nextLine();
                     break;
                 case "2":
                     factory.viewStock();

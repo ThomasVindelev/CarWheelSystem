@@ -2,7 +2,7 @@ package com.company.Model;
 
 public class NormalWheel implements Wheel {
 
-    private int productionTime = 1;
+    private int productionTime = 10;
     private String name = "Normal Wheel";
 
     @Override
