@@ -13,11 +13,9 @@ public class ConveyorBelt implements Runnable {
     public void run() {
         Wheel wheel = null;
         while (true) {
-            synchronized (productionQueue) {
-                if (productionQueue.hasItem()) {
-                    wheel = productionQueue.getNextItem();
-                    unlock = true;
-                }
+            if (productionQueue.hasItem()) {
+                wheel = productionQueue.getNextItem();
+                unlock = true;
             }
             if (unlock) {
                 for (int i = 1; i <= wheel.getProductionTime(); i++) {
@@ -28,9 +26,7 @@ public class ConveyorBelt implements Runnable {
                         unlock = false;
                     }
                 }
-                synchronized (productionStock) {
-                    productionStock.addToStock(wheel);
-                }
+                productionStock.addToStock(wheel);
                 wheelsProduced++;
                 unlock = false;
                 reset();

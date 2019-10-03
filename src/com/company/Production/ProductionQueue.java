@@ -12,11 +12,11 @@ public class ProductionQueue {
         wheels.add(wheel);
     }
 
-    public Wheel getNextItem() {
+    public synchronized Wheel getNextItem() {
         return wheels.poll();
     }
 
-    public boolean hasItem() {
+    public synchronized boolean hasItem() {
         return wheels.peek() != null;
     }
 

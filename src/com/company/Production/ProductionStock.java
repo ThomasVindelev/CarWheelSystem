@@ -14,7 +14,7 @@ public class ProductionStock {
     private int winter = 0;
     private int quality = 0;
 
-    public void addToStock(Wheel wheel) {
+    public synchronized void addToStock(Wheel wheel) {
         wheelStock.add(wheel);
     }
 
